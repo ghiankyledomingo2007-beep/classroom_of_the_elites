@@ -18,6 +18,8 @@ import { createClient } from '@/lib/supabase/server'
 import { calculateProfileCompletion } from '@/lib/profile-completion'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import { StatusBadge } from '@/components/ui/badge'
+import { getStudentMeritClaims } from '@/app/actions/merit'
+import { MeritClaimsSection } from '@/components/merit-claims-section'
 
 // Birthday helper to check if a date is within upcoming 30 days
 function getUpcomingBirthdays(classmates: any[]) {
@@ -65,6 +67,7 @@ export default async function DashboardPage() {
   let classmates: any[] = []
   let birthdayClassmates: any[] = []
   let projectCount = 0
+  let meritClaims: any[] = []
 
   if (user && !isGuestCookie) {
     const { data } = await supabase
@@ -75,6 +78,8 @@ export default async function DashboardPage() {
     profile = data
 
     if (profile) {
+      meritClaims = await getStudentMeritClaims()
+
       const { count } = await supabase
         .from('projects')
         .select('id', { count: 'exact', head: true })
@@ -92,17 +97,16 @@ export default async function DashboardPage() {
 
       const { data: classData } = await supabase
         .from('profiles')
-        .select('id, full_name, nickname, avatar_url, bio, username, skills, profile_accent')
+        .select('id, full_name, username, avatar_url, nickname, profile_accent')
         .eq('classroom_id', profile.classroom_id)
         .eq('status', 'approved')
         .neq('id', user.id)
-        .order('updated_at', { ascending: false })
-        .limit(3)
+        .limit(6)
       classmates = classData || []
 
       const { data: bdayData } = await supabase
         .from('profiles')
-        .select('full_name, nickname, avatar_url, birthday, username')
+        .select('full_name, username, avatar_url, nickname, birthday')
         .eq('classroom_id', profile.classroom_id)
         .eq('status', 'approved')
         .eq('show_birthday', true)
@@ -338,6 +342,9 @@ export default async function DashboardPage() {
               </Link>
             </CardContent>
           </Card>
+
+          {/* Merit Requests Section */}
+          <MeritClaimsSection initialClaims={meritClaims} />
 
           {/* Birthdays Section */}
           <section className="space-y-4">

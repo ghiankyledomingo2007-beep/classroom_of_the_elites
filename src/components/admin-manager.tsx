@@ -19,7 +19,8 @@ import {
   Loader2,
   AlertTriangle,
   UserX,
-  MessageSquareOff
+  MessageSquareOff,
+  Sparkles
 } from 'lucide-react'
 import { announcementSchema } from '@/lib/validation/schemas'
 import { 
@@ -32,6 +33,7 @@ import {
   updateClassroomSettingsAction,
   regenerateInvitationCodeAction
 } from '@/app/actions/admin'
+import { resolveMeritClaim } from '@/app/actions/merit'
 import { Input, Textarea } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge, StatusBadge } from '@/components/ui/badge'
@@ -49,6 +51,7 @@ export interface AdminManagerProps {
   reports: any[]
   announcements: any[]
   currentUserId: string
+  initialPendingClaims?: any[]
 }
 
 export function AdminManager({
@@ -56,13 +59,15 @@ export function AdminManager({
   profiles,
   reports,
   announcements,
-  currentUserId
+  currentUserId,
+  initialPendingClaims = []
 }: AdminManagerProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const defaultTab = (searchParams.get('tab') as any) || 'overview'
   
-  const [activeTab, setActiveTab] = useState<'overview' | 'approvals' | 'students' | 'reports' | 'announcements' | 'settings'>(defaultTab)
+  const [activeTab, setActiveTab] = useState<'overview' | 'approvals' | 'merit' | 'students' | 'reports' | 'announcements' | 'settings'>(defaultTab)
+  const [pendingClaims, setPendingClaims] = useState<any[]>(initialPendingClaims)
   const [isPending, startTransition] = useTransition()
 
   // Custom states for moderation/report actions
@@ -241,6 +246,7 @@ export function AdminManager({
         {([
           { key: 'overview', label: 'Overview', icon: Users },
           { key: 'approvals', label: `Pending Approvals (${pendingCount})`, icon: Clock },
+          { key: 'merit', label: `Merit Claims (${pendingClaims.length})`, icon: Sparkles },
           { key: 'students', label: 'Student Directory', icon: UserCheck },
           { key: 'reports', label: `Flags Queue (${activeReportsCount})`, icon: ShieldAlert },
           { key: 'announcements', label: 'Announcements', icon: Megaphone },
@@ -253,7 +259,7 @@ export function AdminManager({
               onClick={() => setActiveTab(t.key)}
               className={`flex items-center gap-2 px-4 py-3 border-b-2 font-semibold text-sm transition-all ${
                 activeTab === t.key
-                  ? 'border-indigo-600 text-indigo-650 dark:text-indigo-400'
+                  ? 'border-rose-600 text-rose-600 dark:text-rose-400'
                   : 'border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
@@ -401,6 +407,90 @@ export function AdminManager({
               ) : (
                 <div className="p-8 text-center text-zinc-400 text-sm">
                   No registrations pending approval.
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Tab: MERIT CLAIMS */}
+        {activeTab === 'merit' && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Pending Merit Claims</CardTitle>
+              <CardDescription>Review and approve merit requests from classmates to award points and update their classroom tier</CardDescription>
+            </CardHeader>
+            <CardContent className="overflow-x-auto">
+              {pendingClaims.length > 0 ? (
+                <table className="w-full text-left text-sm border-collapse">
+                  <thead>
+                    <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400">
+                      <th className="py-3 px-4 font-semibold font-mono">Student</th>
+                      <th className="py-3 px-4 font-semibold font-mono">Claim Title</th>
+                      <th className="py-3 px-4 font-semibold font-mono">Description</th>
+                      <th className="py-3 px-4 font-semibold font-mono text-right">Requested</th>
+                      <th className="py-3 px-4 font-semibold font-mono text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pendingClaims.map((claim) => (
+                      <tr key={claim.id} className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30">
+                        <td className="py-4 px-4 font-medium text-zinc-900 dark:text-zinc-150">
+                          <div className="flex items-center gap-2">
+                            {claim.profile?.avatar_url ? (
+                              <img src={claim.profile.avatar_url} alt="" className="w-7 h-7 rounded-full object-cover" />
+                            ) : (
+                              <div className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center font-bold text-xs">
+                                {claim.profile?.nickname?.substring(0, 2).toUpperCase() || claim.profile?.full_name?.substring(0, 2).toUpperCase()}
+                              </div>
+                            )}
+                            <span>{claim.profile?.nickname || claim.profile?.full_name}</span>
+                          </div>
+                        </td>
+                        <td className="py-4 px-4 font-semibold text-zinc-800 dark:text-zinc-205">{claim.title}</td>
+                        <td className="py-4 px-4 text-zinc-500 max-w-xs truncate">{claim.description || 'No description provided'}</td>
+                        <td className="py-4 px-4 font-mono font-bold text-rose-500 text-right">+{claim.points_requested} CP</td>
+                        <td className="py-4 px-4">
+                          <div className="flex items-center justify-center gap-2">
+                            <button
+                              disabled={isPending}
+                              onClick={async () => {
+                                startTransition(async () => {
+                                  const res = await resolveMeritClaim(claim.id, 'approved')
+                                  if (res.success) {
+                                    setPendingClaims(prev => prev.filter(c => c.id !== claim.id))
+                                  }
+                                })
+                              }}
+                              className="p-1 text-emerald-500 hover:bg-emerald-500/10 rounded-lg transition-colors"
+                              title="Approve"
+                            >
+                              <Check className="w-4 h-4" />
+                            </button>
+                            <button
+                              disabled={isPending}
+                              onClick={async () => {
+                                startTransition(async () => {
+                                  const res = await resolveMeritClaim(claim.id, 'rejected')
+                                  if (res.success) {
+                                    setPendingClaims(prev => prev.filter(c => c.id !== claim.id))
+                                  }
+                                })
+                              }}
+                              className="p-1 text-rose-500 hover:bg-rose-500/10 rounded-lg transition-colors"
+                              title="Reject"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="p-8 text-center text-zinc-400 text-sm">
+                  No pending merit requests.
                 </div>
               )}
             </CardContent>

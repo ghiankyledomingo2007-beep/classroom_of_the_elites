@@ -2,6 +2,7 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { AdminManager } from '@/components/admin-manager'
+import { getPendingMeritClaims } from '@/app/actions/merit'
 
 import { cookies } from 'next/headers'
 import { DEMO_CLASSMATES, DEMO_ANNOUNCEMENTS } from '@/lib/guest-data'
@@ -33,6 +34,7 @@ export default async function AdminPage() {
   ]
   let reports: any[] = []
   let announcements: any[] = DEMO_ANNOUNCEMENTS
+  let pendingClaims: any[] = []
 
   if (user && !isGuestCookie) {
     const { data: profile } = await supabase
@@ -73,6 +75,8 @@ export default async function AdminPage() {
         .eq('classroom_id', profile.classroom_id)
         .order('created_at', { ascending: false })
       if (anns) announcements = anns
+
+      pendingClaims = await getPendingMeritClaims()
     } else {
       return redirect('/dashboard')
     }
@@ -95,6 +99,7 @@ export default async function AdminPage() {
         reports={reports || []}
         announcements={announcements || []}
         currentUserId={user?.id || 'guest-user-101'}
+        initialPendingClaims={pendingClaims}
       />
     </div>
   )
