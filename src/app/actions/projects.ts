@@ -58,6 +58,22 @@ export async function createProjectAction(prevState: any, data: any): Promise<Pr
     return { success: false, error: error.message || 'Failed to create project.' }
   }
 
+  // 3b. Automatically file a pending merit claim for sharing a project!
+  try {
+    await supabase
+      .from('merit_claims')
+      .insert({
+        profile_id: user.id,
+        title: `Shared Project: ${fields.title}`,
+        description: `Automatically filed claim for publishing a new project. technologies: ${fields.technologies.join(', ')}`,
+        points_requested: 100,
+        link_url: fields.liveUrl || fields.githubUrl || null,
+        status: 'pending'
+      })
+  } catch (meritErr) {
+    console.error('Auto merit claim generation failed:', meritErr)
+  }
+
   // 4. Revalidate cache
   revalidatePath('/projects')
   revalidatePath(`/profile/${profile.username}`)

@@ -7,6 +7,7 @@ export async function submitMeritClaim(formData: {
   title: string
   description: string
   pointsRequested: number
+  linkUrl?: string
 }) {
   const supabase = await createClient()
 
@@ -22,6 +23,7 @@ export async function submitMeritClaim(formData: {
     title: formData.title,
     description: formData.description,
     points_requested: formData.pointsRequested,
+    link_url: formData.linkUrl || null,
     status: 'pending'
   })
 

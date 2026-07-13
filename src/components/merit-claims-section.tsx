@@ -3,13 +3,14 @@
 import React, { useState, useTransition } from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { submitMeritClaim } from '@/app/actions/merit'
-import { Sparkles, Loader2, CheckCircle2, XCircle, AlertCircle, Plus, Send } from 'lucide-react'
+import { Sparkles, Loader2, CheckCircle2, XCircle, AlertCircle, Plus, Send, ExternalLink } from 'lucide-react'
 
 interface MeritClaim {
   id: string
   title: string
   description: string | null
   points_requested: number
+  link_url: string | null
   status: string
   created_at: string
 }
@@ -19,6 +20,7 @@ export function MeritClaimsSection({ initialClaims }: { initialClaims: MeritClai
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [linkUrl, setLinkUrl] = useState('')
   const [pointsRequested, setPointsRequested] = useState(100)
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
@@ -39,12 +41,14 @@ export function MeritClaimsSection({ initialClaims }: { initialClaims: MeritClai
         title,
         description,
         pointsRequested,
+        linkUrl: linkUrl.trim() || undefined
       })
 
       if (res.success) {
         setSuccess(true)
         setTitle('')
         setDescription('')
+        setLinkUrl('')
         setPointsRequested(100)
         setIsFormOpen(false)
         
@@ -54,6 +58,7 @@ export function MeritClaimsSection({ initialClaims }: { initialClaims: MeritClai
           title,
           description: description || null,
           points_requested: pointsRequested,
+          link_url: linkUrl.trim() || null,
           status: 'pending',
           created_at: new Date().toISOString()
         }
@@ -126,6 +131,17 @@ export function MeritClaimsSection({ initialClaims }: { initialClaims: MeritClai
               </div>
 
               <div className="space-y-1">
+                <label className="block text-xs font-semibold text-zinc-650 dark:text-zinc-400">Share Link (Optional)</label>
+                <input
+                  type="url"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
+                  placeholder="e.g., https://github.com/... or Google Drive"
+                  className="w-full px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 text-sm focus:outline-none focus:ring-1 focus:ring-rose-500"
+                />
+              </div>
+
+              <div className="space-y-1">
                 <label className="block text-xs font-semibold text-zinc-650 dark:text-zinc-400">Points Requested</label>
                 <select
                   value={pointsRequested}
@@ -164,8 +180,18 @@ export function MeritClaimsSection({ initialClaims }: { initialClaims: MeritClai
               {claims.map((claim) => (
                 <div key={claim.id} className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800/80 flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <span className="block font-semibold text-xs text-zinc-900 dark:text-white truncate">
-                      {claim.title}
+                    <span className="flex items-center gap-1.5 font-semibold text-xs text-zinc-900 dark:text-white">
+                      <span className="truncate">{claim.title}</span>
+                      {claim.link_url && (
+                        <a 
+                          href={claim.link_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-rose-500 hover:text-rose-600 shrink-0"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </span>
                     <span className="block text-[10px] text-zinc-400 font-medium mt-0.5">
                       {new Date(claim.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} &bull; Requested {claim.points_requested} CP

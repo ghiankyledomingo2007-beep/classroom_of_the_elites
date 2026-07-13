@@ -20,7 +20,8 @@ import {
   AlertTriangle,
   UserX,
   MessageSquareOff,
-  Sparkles
+  Sparkles,
+  ExternalLink
 } from 'lucide-react'
 import { announcementSchema } from '@/lib/validation/schemas'
 import { 
@@ -447,7 +448,22 @@ export function AdminManager({
                             <span>{claim.profile?.nickname || claim.profile?.full_name}</span>
                           </div>
                         </td>
-                        <td className="py-4 px-4 font-semibold text-zinc-800 dark:text-zinc-205">{claim.title}</td>
+                        <td className="py-4 px-4 font-semibold text-zinc-800 dark:text-zinc-200">
+                          <div className="flex items-center gap-1.5">
+                            <span>{claim.title}</span>
+                            {claim.link_url && (
+                              <a 
+                                href={claim.link_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-rose-500 hover:text-rose-600 shrink-0"
+                                title="View Shared Content"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </td>
                         <td className="py-4 px-4 text-zinc-500 max-w-xs truncate">{claim.description || 'No description provided'}</td>
                         <td className="py-4 px-4 font-mono font-bold text-rose-500 text-right">+{claim.points_requested} CP</td>
                         <td className="py-4 px-4">
