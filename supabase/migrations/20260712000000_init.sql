@@ -137,6 +137,9 @@ BEGIN
             NEW.role := OLD.role;
             NEW.status := OLD.status;
             NEW.classroom_id := OLD.classroom_id;
+            NEW.points := OLD.points;
+            NEW.tier := OLD.tier;
+            NEW.student_id_code := OLD.student_id_code;
         END IF;
     END IF;
     RETURN NEW;
@@ -201,7 +204,7 @@ CREATE POLICY "Allow admins to read any profile in their classroom"
 
 CREATE POLICY "Allow users to insert their own profile"
     ON public.profiles FOR INSERT
-    WITH CHECK (auth.uid() = id);
+    WITH CHECK (auth.uid() = id AND role = 'student' AND status = 'pending' AND points = 500 AND tier = 'Class C • Regular');
 
 CREATE POLICY "Allow users to update their own profile"
     ON public.profiles FOR UPDATE

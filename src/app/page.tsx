@@ -68,19 +68,13 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/register"
-              className="px-6 py-3.5 text-base font-semibold bg-zinc-900 border border-rose-500/30 text-zinc-200 rounded-xl hover:bg-zinc-800 transition-all hover:-translate-y-0.5 font-mono"
+              className="px-6 py-3.5 text-base font-semibold bg-zinc-900 border border-rose-500/30 text-zinc-200 rounded-xl hover:bg-zinc-800 hover:border-rose-500/60 transition-all hover:-translate-y-0.5 font-mono"
             >
               Join Classroom
             </Link>
             <Link
               href="/login"
-              className="px-6 py-3.5 text-base font-semibold bg-transparent border border-zinc-700 text-zinc-300 rounded-xl hover:bg-zinc-900 transition-all hover:-translate-y-0.5 font-mono"
-            >
-              Join Classroom
-            </Link>
-            <Link
-              href="/login"
-              className="px-6 py-3.5 text-base font-semibold bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-all hover:-translate-y-0.5"
+              className="px-6 py-3.5 text-base font-semibold bg-transparent border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 rounded-xl hover:bg-zinc-900/50 transition-all hover:-translate-y-0.5 font-mono"
             >
               Sign In
             </Link>
@@ -88,41 +82,44 @@ export default function LandingPage() {
         </section>
 
         {/* Value Proposition / Features Grid */}
-        <section className="bg-white dark:bg-zinc-900/50 border-t border-b border-zinc-200/50 dark:border-zinc-800/50 py-20 px-6">
+        <section className="bg-[#0c0c0e] border-t border-b border-zinc-900 py-20 px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-white text-center tracking-tight mb-12">
-              Designed with Privacy and Students in Mind
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white text-center tracking-tight mb-12 font-mono">
+              Classroom Protocol & Infrastructure
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {/* Feature 1 */}
-              <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-250/30 dark:border-zinc-800/80 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+              <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-900 shadow-sm relative overflow-hidden group hover:border-rose-500/30 transition-all">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-rose-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-4">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg text-zinc-900 dark:text-white">Strict Classroom Privacy</h3>
-                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <h3 className="font-bold text-lg text-white font-mono">Strict Classroom Privacy</h3>
+                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
                   Only students with a valid, secure classroom invitation code can register. Student directories and portfolios are invisible to the public.
                 </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-250/30 dark:border-zinc-800/80 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+              <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-900 shadow-sm relative overflow-hidden group hover:border-rose-500/30 transition-all">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-rose-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-4">
                   <FolderHeart className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg text-zinc-900 dark:text-white">Showcase Projects</h3>
-                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <h3 className="font-bold text-lg text-white font-mono">Showcase Projects</h3>
+                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
                   Build custom profile card pages, list favorite subjects, log skills, interests, and share links to personal, school, or team projects.
                 </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-250/30 dark:border-zinc-800/80 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+              <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-900 shadow-sm relative overflow-hidden group hover:border-rose-500/30 transition-all">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-rose-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-4">
                   <UserCheck className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg text-zinc-900 dark:text-white">Active Moderation</h3>
-                <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <h3 className="font-bold text-lg text-white font-mono">Active Moderation</h3>
+                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
                   Classroom administrators manage invitation codes, approve pending students, publish announcements, and review flags/reports.
                 </p>
               </div>
@@ -132,9 +129,9 @@ export default function LandingPage() {
 
         {/* Privacy Note */}
         <section className="py-20 px-6 text-center max-w-3xl mx-auto">
-          <div className="p-8 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <h3 className="font-bold text-lg text-zinc-900 dark:text-white">Safety & Security Compliance</h3>
-            <p className="mt-3 text-sm text-zinc-650 dark:text-zinc-400 leading-relaxed">
+          <div className="p-8 rounded-2xl bg-zinc-950 border border-zinc-900">
+            <h3 className="font-bold text-lg text-white font-mono">Safety & Security Compliance</h3>
+            <p className="mt-3 text-sm text-zinc-400 leading-relaxed">
               We understand the sensitivity of student information. No search engine indexing is allowed, email addresses are protected by default, and students control which optional details are shared with classmates.
             </p>
           </div>

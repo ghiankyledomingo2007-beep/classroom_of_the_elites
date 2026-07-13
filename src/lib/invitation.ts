@@ -1,11 +1,9 @@
 import crypto from 'crypto'
 
 export function hashInvitationCode(code: string): string {
-  const salt = process.env.INVITATION_CODE_SALT || 'default-salt'
-  return crypto
-    .createHmac('sha256', salt)
-    .update(code.trim().toLowerCase())
-    .digest('hex')
+  const salt = process.env.INVITATION_CODE_SALT
+  if (!salt) throw new Error('INVITATION_CODE_SALT environment variable is required')
+  return crypto.pbkdf2Sync(code.trim(), salt, 100000, 32, 'sha512').toString('hex')
 }
 
 export function verifyInvitationCode(code: string, hashedCode: string): boolean {

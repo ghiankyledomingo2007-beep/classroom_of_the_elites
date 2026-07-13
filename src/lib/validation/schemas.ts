@@ -80,7 +80,7 @@ export const profileEditSchema = z.object({
 export const projectSchema = z.object({
   title: z.string().min(2, 'Project title must be at least 2 characters').max(100, 'Project title cannot exceed 100 characters'),
   description: z.string().min(10, 'Description must be at least 10 characters').max(1000, 'Description cannot exceed 1000 characters'),
-  githubUrl: urlSchema,
+  githubUrl: githubUrlSchema,
   liveUrl: urlSchema,
   technologies: z.array(z.string()),
   projectDate: z.string().optional().or(z.literal('')),

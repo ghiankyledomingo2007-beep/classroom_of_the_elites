@@ -30,7 +30,11 @@ loadEnv();
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const inviteSalt = process.env.INVITATION_CODE_SALT || 'default-salt';
+const inviteSalt = process.env.INVITATION_CODE_SALT;
+if (!inviteSalt) {
+  console.error('Missing INVITATION_CODE_SALT in .env file.');
+  process.exit(1);
+}
 
 if (!supabaseUrl || !supabaseServiceKey) {
   console.error('Missing Supabase credentials in .env file.');
@@ -45,12 +49,11 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   }
 });
 
-// Invitation code hashing helper
+// Invitation code hashing helper (mirrors src/lib/invitation.ts)
 function hashInvite(code) {
   return crypto
-    .createHmac('sha256', inviteSalt)
-    .update(code.trim().toLowerCase())
-    .digest('hex');
+    .pbkdf2Sync(code.trim(), inviteSalt, 100000, 32, 'sha512')
+    .toString('hex');
 }
 
 async function seed() {

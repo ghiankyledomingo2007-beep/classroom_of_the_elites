@@ -82,6 +82,19 @@ export async function updateProfileAction(prevState: any, data: any): Promise<Pr
 export async function updateAvatarAction(avatarUrl: string): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient()
 
+  const AVATAR_URL_MAX = 500
+  if (typeof avatarUrl !== 'string' || avatarUrl.length > AVATAR_URL_MAX) {
+    return { success: false, error: 'Invalid avatar URL' }
+  }
+  try {
+    const parsed = new URL(avatarUrl)
+    if (parsed.protocol !== 'https:' && parsed.hostname !== 'localhost' && parsed.hostname !== '127.0.0.1') {
+      return { success: false, error: 'Avatar URL must use HTTPS' }
+    }
+  } catch {
+    return { success: false, error: 'Invalid avatar URL' }
+  }
+
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { success: false, error: 'Unauthorized' }
 

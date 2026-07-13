@@ -148,6 +148,7 @@ describe('ClassSpace Tests', () => {
 
   describe('Invitation Code Verification', () => {
     it('should securely hash and verify invitation codes', () => {
+      process.env.INVITATION_CODE_SALT = 'test-salt-for-testing'
       const code = 'SECRETCODE2026'
       const hashed = hashInvitationCode(code)
       expect(hashed).not.toBe(code)
