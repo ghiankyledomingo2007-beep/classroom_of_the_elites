@@ -13,34 +13,41 @@ export default async function LeaderboardPage() {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  let classmates: any[] = DEMO_CLASSMATES
+  let classmates: any[] = DEMO_CLASSMATES.map((c, i) => ({
+    ...c,
+    classroom: {
+      section_name: i < 3 ? 'Section A' : i < 6 ? 'Section B' : 'Section C'
+    }
+  }))
 
   if (user && !isGuestCookie) {
-    const { data: profile } = await supabase
+    const { data } = await supabase
       .from('profiles')
-      .select('classroom_id')
-      .eq('id', user.id)
-      .single()
+      .select('*, classroom:classrooms(section_name)')
+      .eq('status', 'approved')
 
-    if (profile) {
-      const { data } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('classroom_id', profile.classroom_id)
-        .eq('status', 'approved')
-
-      if (data && data.length > 0) {
-        classmates = data.map(c => ({
-          ...c,
-          points: c.points ?? 500,
-          tier: c.tier ?? 'Class C • Regular',
-          student_id_code: c.student_id_code ?? `ANHS-${c.id.slice(0, 4).toUpperCase()}`
-        }))
-      }
+    if (data && data.length > 0) {
+      classmates = data.map(c => ({
+        ...c,
+        points: c.points ?? 500,
+        tier: c.tier ?? 'Class C • Regular',
+        student_id_code: c.student_id_code ?? `ANHS-${c.id.slice(0, 4).toUpperCase()}`
+      }))
     }
   }
 
-  // Sort by points descending
+  // Aggregate points by section
+  const sectionPointsMap: Record<string, number> = {}
+  classmates.forEach(p => {
+    const secName = p.classroom?.section_name || 'Section C'
+    sectionPointsMap[secName] = (sectionPointsMap[secName] || 0) + (p.points || 500)
+  })
+
+  const sectionStandings = Object.entries(sectionPointsMap)
+    .map(([name, points]) => ({ name, points }))
+    .sort((a, b) => b.points - a.points)
+
+  // Sort classmates by points descending
   const sortedClassmates = [...classmates].sort((a, b) => (b.points || 0) - (a.points || 0))
   const topThree = sortedClassmates.slice(0, 3)
   const restClassmates = sortedClassmates.slice(3)
@@ -83,6 +90,46 @@ export default async function LeaderboardPage() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Section Standings Scoreboard */}
+      <div>
+        <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2 mb-4 font-mono">
+          <TrendingUp className="w-5 h-5 text-rose-500" />
+          <span>Active Section Standings</span>
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {sectionStandings.map((section, idx) => {
+            const placeColors = [
+              'bg-gradient-to-br from-rose-500/10 to-rose-500/0 border-rose-500/35 ring-1 ring-rose-500/10',
+              'bg-gradient-to-br from-zinc-500/10 to-zinc-500/0 border-zinc-700/50',
+              'bg-gradient-to-br from-amber-700/10 to-amber-700/0 border-amber-800/40',
+              'bg-zinc-900/40 border-zinc-900/60'
+            ]
+            const bgClass = placeColors[idx] || placeColors[3]
+            const textClass = idx === 0 ? 'text-rose-400' : 'text-zinc-400 dark:text-zinc-350'
+            return (
+              <Card key={section.name} className={`${bgClass} overflow-hidden shadow-md`}>
+                <CardContent className="p-4 flex flex-col justify-between h-full">
+                  <div>
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block mb-1">
+                      Rank #{idx + 1}
+                    </span>
+                    <span className={`text-base font-bold font-mono tracking-tight ${textClass} block`}>
+                      {section.name}
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <span className="text-xl font-extrabold font-mono text-white tracking-tight">
+                      {section.points.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] font-mono text-zinc-400 ml-1">CP</span>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
       </div>
 
