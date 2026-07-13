@@ -102,7 +102,7 @@ export default function SettingsPage() {
                   className="flex items-center justify-between p-3 rounded-xl border border-zinc-200/50 dark:border-zinc-850 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors text-sm font-semibold"
                 >
                   <span className="flex items-center gap-2">
-                    <UserCheck className="w-4 h-4 text-indigo-500" />
+                    <UserCheck className="w-4 h-4 text-rose-500" />
                     Configure Visibility & Card
                   </span>
                 </Link>
@@ -123,12 +123,12 @@ export default function SettingsPage() {
                       </>
                     ) : (
                       <>
-                        <Moon className="w-4 h-4 text-indigo-400" />
+                        <Moon className="w-4 h-4 text-rose-400" />
                         Dark Mode Active
                       </>
                     )}
                   </span>
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">Toggle</span>
+                  <span className="text-xs font-bold text-rose-600 dark:text-rose-400">Toggle</span>
                 </button>
               </div>
 
@@ -161,7 +161,7 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
-                <KeyRound className="w-5 h-5 text-indigo-500" />
+                <KeyRound className="w-5 h-5 text-rose-500" />
                 <CardTitle>Change Password</CardTitle>
               </div>
               <CardDescription>Keep your account secure with a strong password</CardDescription>
@@ -204,7 +204,7 @@ export default function SettingsPage() {
                   <button
                     type="submit"
                     disabled={isPasswordPending}
-                    className="py-2 px-4 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-750 rounded-xl transition-all shadow-md shadow-indigo-650/10 flex items-center gap-1.5 disabled:opacity-50"
+                    className="py-2 px-4 text-xs font-semibold text-white bg-rose-600 hover:bg-rose-750 rounded-xl transition-all shadow-md shadow-rose-650/10 flex items-center gap-1.5 disabled:opacity-50"
                   >
                     {isPasswordPending ? (
                       <>

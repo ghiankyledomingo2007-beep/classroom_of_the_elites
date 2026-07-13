@@ -24,7 +24,7 @@ export default function PendingPage() {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col justify-center py-12 px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2.5 rounded-2xl bg-indigo-600 text-white shadow-md shadow-indigo-600/10">
+          <div className="p-2.5 rounded-2xl bg-rose-600 text-white shadow-md shadow-rose-600/10">
             <GraduationCap className="w-8 h-8" />
           </div>
           <span className="font-extrabold text-2xl tracking-tight text-zinc-900 dark:text-white">ClassSpace</span>
@@ -52,7 +52,7 @@ export default function PendingPage() {
               <button
                 type="button"
                 onClick={handleCheckStatus}
-                className="w-full py-2.5 px-4 font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 font-semibold text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl transition-all flex items-center justify-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
                 Check Status / Refresh

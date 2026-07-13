@@ -56,7 +56,7 @@ export default async function AnnouncementsPage() {
         {isAdmin && (
           <Link
             href="/admin?tab=announcements"
-            className="inline-flex items-center gap-2 py-2 px-4 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all shadow-sm shadow-indigo-650/10"
+            className="inline-flex items-center gap-2 py-2 px-4 text-xs font-semibold text-white bg-rose-600 hover:bg-rose-700 rounded-xl transition-all shadow-sm shadow-rose-650/10"
           >
             <Shield className="w-4 h-4" />
             Manage Announcements
@@ -71,7 +71,7 @@ export default async function AnnouncementsPage() {
               key={ann.id} 
               className={`transition-all ${
                 ann.is_pinned 
-                  ? 'border-indigo-200 dark:border-indigo-900/50 ring-1 ring-indigo-50/50 dark:ring-indigo-950/10' 
+                  ? 'border-rose-200 dark:border-rose-900/50 ring-1 ring-rose-50/50 dark:ring-rose-950/10' 
                   : ''
               }`}
             >
@@ -82,7 +82,7 @@ export default async function AnnouncementsPage() {
                     <div className="flex items-center gap-2 flex-wrap">
                       {ann.is_pinned && (
                         <Badge variant="secondary" className="gap-1 px-2 py-0.5">
-                          <Pin className="w-3 h-3 rotate-45 text-indigo-600 dark:text-indigo-400" />
+                          <Pin className="w-3 h-3 rotate-45 text-rose-600 dark:text-rose-400" />
                           Pinned
                         </Badge>
                       )}

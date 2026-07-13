@@ -135,7 +135,7 @@ export default async function DashboardPage() {
     orange: 'bg-orange-600 text-orange-600',
   }
 
-  const userAccent = accentColors[profile.profile_accent] || 'bg-indigo-600'
+  const userAccent = accentColors[profile.profile_accent] || 'bg-rose-600'
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -211,7 +211,7 @@ export default async function DashboardPage() {
                 <CardTitle>Profile Completion</CardTitle>
                 <CardDescription>Get your card showcase ready for your classmates</CardDescription>
               </div>
-              <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400">
+              <span className="text-2xl font-black text-rose-600 dark:text-rose-400">
                 {percentage}%
               </span>
             </CardHeader>
@@ -238,7 +238,7 @@ export default async function DashboardPage() {
                   <div className="pt-4 flex justify-end">
                     <Link
                       href="/profile/edit"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 transition-colors"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-rose-600 hover:text-rose-500 dark:text-rose-400 transition-colors"
                     >
                       Complete Profile <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -257,12 +257,12 @@ export default async function DashboardPage() {
           <section className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 flex items-center gap-2">
-                <Megaphone className="w-5 h-5 text-indigo-500" />
+                <Megaphone className="w-5 h-5 text-rose-500" />
                 Class Announcements
               </h2>
               <Link
                 href="/announcements"
-                className="text-sm font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 transition-colors inline-flex items-center gap-1"
+                className="text-sm font-semibold text-rose-600 hover:text-rose-500 dark:text-rose-400 transition-colors inline-flex items-center gap-1"
               >
                 View all <ChevronRight className="w-4 h-4" />
               </Link>
@@ -271,13 +271,13 @@ export default async function DashboardPage() {
             {announcements && announcements.length > 0 ? (
               <div className="space-y-4">
                 {announcements.map((ann) => (
-                  <Card key={ann.id} className={ann.is_pinned ? 'border-indigo-200 dark:border-indigo-950/50 ring-1 ring-indigo-50/50 dark:ring-indigo-950/10' : ''}>
+                  <Card key={ann.id} className={ann.is_pinned ? 'border-rose-200 dark:border-rose-950/50 ring-1 ring-rose-50/50 dark:ring-rose-950/10' : ''}>
                     <CardContent className="p-6">
                       <div className="flex justify-between items-start gap-4">
                         <div className="space-y-1">
                           <div className="flex items-center gap-2 flex-wrap">
                             {ann.is_pinned && (
-                              <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 rounded border border-indigo-250/20">
+                              <span className="px-2 py-0.5 text-[10px] font-bold bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 rounded border border-rose-250/20">
                                 Pinned
                               </span>
                             )}
@@ -310,7 +310,7 @@ export default async function DashboardPage() {
         <div className="space-y-8">
           
           {/* Quick Links Card */}
-          <Card className="bg-gradient-to-b from-indigo-500/5 to-indigo-500/0 border-indigo-500/10">
+          <Card className="bg-gradient-to-b from-rose-500/5 to-rose-500/0 border-rose-500/10">
             <CardHeader>
               <CardTitle>Quick Navigation</CardTitle>
             </CardHeader>
@@ -320,7 +320,7 @@ export default async function DashboardPage() {
                 className="flex items-center justify-between p-3 rounded-xl border border-zinc-200/50 dark:border-zinc-850 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-sm font-semibold"
               >
                 <span className="flex items-center gap-2">
-                  <UserCheck className="w-4 h-4 text-indigo-500" />
+                  <UserCheck className="w-4 h-4 text-rose-500" />
                   Edit Profile Card
                 </span>
                 <ChevronRight className="w-4 h-4 text-zinc-400" />
@@ -342,7 +342,7 @@ export default async function DashboardPage() {
           {/* Birthdays Section */}
           <section className="space-y-4">
             <h2 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
-              <Cake className="w-5 h-5 text-indigo-500" />
+              <Cake className="w-5 h-5 text-rose-500" />
               Upcoming Birthdays
             </h2>
 
@@ -375,7 +375,7 @@ export default async function DashboardPage() {
                           </span>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-1 rounded-lg">
+                      <span className="text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 px-2 py-1 rounded-lg">
                         {bday.daysUntil === 0 ? 'Today!' : bday.daysUntil === 1 ? 'Tomorrow' : `In ${bday.daysUntil} days`}
                       </span>
                     </div>
@@ -392,15 +392,15 @@ export default async function DashboardPage() {
           {/* Recently Active Classmates */}
           <section className="space-y-4">
             <h2 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
-              <UserCheck className="w-5 h-5 text-indigo-500" />
+              <UserCheck className="w-5 h-5 text-rose-500" />
               Recently Active
             </h2>
 
             {classmates && classmates.length > 0 ? (
               <div className="space-y-3">
                 {classmates.map((student) => {
-                  const studentAccent = student.profile_accent || 'indigo'
-                  const accentColorClass = accentColors[studentAccent]?.split(' ')[1] || 'text-indigo-600'
+                  const studentAccent = student.profile_accent || 'rose'
+                  const accentColorClass = accentColors[studentAccent]?.split(' ')[1] || 'text-rose-600'
                   return (
                     <Link href={`/profile/${student.username}`} key={student.id} className="block">
                       <div className="flex items-center justify-between p-3.5 rounded-xl border border-zinc-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900 hover:-translate-y-0.5 transition-all hover:shadow-sm">

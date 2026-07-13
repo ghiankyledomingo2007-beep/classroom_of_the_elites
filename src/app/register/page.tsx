@@ -27,7 +27,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col justify-center py-12 px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center">
         <Link href="/" className="flex items-center gap-3 mb-6">
-          <div className="p-2.5 rounded-2xl bg-indigo-600 text-white shadow-md shadow-indigo-600/10">
+          <div className="p-2.5 rounded-2xl bg-rose-600 text-white shadow-md shadow-rose-600/10">
             <GraduationCap className="w-8 h-8" />
           </div>
           <span className="font-extrabold text-2xl tracking-tight text-zinc-900 dark:text-white">ClassSpace</span>
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                     name="rulesAgreement"
                     type="checkbox"
                     required
-                    className="h-4.5 w-4.5 rounded border-zinc-300 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4.5 w-4.5 rounded border-zinc-300 text-rose-600 focus:ring-rose-500"
                   />
                 </div>
                 <div className="ml-3 text-xs">
@@ -129,7 +129,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isPending || state.success}
-                className="w-full py-3 px-4 mt-4 font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 px-4 mt-4 font-semibold text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl transition-all shadow-md shadow-rose-600/10 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isPending ? (
                   <>
@@ -146,7 +146,7 @@ export default function RegisterPage() {
               <span className="text-zinc-500 dark:text-zinc-400">Already registered? </span>
               <Link
                 href="/login"
-                className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
+                className="font-semibold text-rose-600 hover:text-rose-500 dark:text-rose-400 dark:hover:text-rose-300 transition-colors"
               >
                 Sign In
               </Link>

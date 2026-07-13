@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col justify-center py-12 px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center text-center">
         <Link href="/" className="flex items-center gap-3 mb-6">
-          <div className="p-2.5 rounded-2xl bg-indigo-600 text-white shadow-md shadow-indigo-600/10">
+          <div className="p-2.5 rounded-2xl bg-rose-600 text-white shadow-md shadow-rose-600/10">
             <GraduationCap className="w-8 h-8" />
           </div>
           <span className="font-extrabold text-2xl tracking-tight text-zinc-900 dark:text-white">ClassSpace</span>
@@ -27,7 +27,7 @@ export default function NotFound() {
         <div className="mt-8 flex gap-3">
           <Link
             href="/dashboard"
-            className="px-5 py-2.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-755 rounded-xl transition-all shadow-sm shadow-indigo-650/15"
+            className="px-5 py-2.5 text-sm font-semibold text-white bg-rose-600 hover:bg-rose-755 rounded-xl transition-all shadow-sm shadow-rose-650/15"
           >
             Go to Dashboard
           </Link>

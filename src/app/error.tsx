@@ -31,7 +31,7 @@ export default function Error({
         <div className="mt-8">
           <button
             onClick={() => reset()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all shadow-sm shadow-indigo-650/15"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 rounded-xl transition-all shadow-sm shadow-rose-650/15"
           >
             <RotateCcw className="w-4 h-4" />
             Try Again

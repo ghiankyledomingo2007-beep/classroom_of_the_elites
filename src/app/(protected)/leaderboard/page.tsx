@@ -151,7 +151,7 @@ export default async function LeaderboardPage() {
         <Card className="lg:col-span-2 border-zinc-200/80 dark:border-zinc-800 shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-bold flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              <TrendingUp className="w-5 h-5 text-rose-600 dark:text-rose-400" />
               <span>Full Classroom Rankings</span>
             </CardTitle>
             <CardDescription>
