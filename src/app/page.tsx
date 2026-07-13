@@ -50,13 +50,13 @@ export default function LandingPage() {
 
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold tracking-wider uppercase mb-6">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            ADVANCED NURTURING HIGH SCHOOL • S-SYSTEM SHOWCASE
+            ADVANCED NURTURING HIGH SCHOOL • CLASSROOM SHOWCASE
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-3xl mx-auto font-mono">
-            In this classroom, every point counts.
+            In this classroom, every talent shines.
           </h1>
           <p className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            ClassSpace is a secure COTE-inspired student directory, portfolio showcase, and merit point economy where classmates earn Class Points (CP) and compete in rankings.
+            ClassSpace is a secure COTE-inspired student directory and portfolio showcase where classmates share projects, skills, and discover peer talents.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link

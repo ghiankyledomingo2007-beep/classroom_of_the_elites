@@ -64,13 +64,13 @@ export default async function LeaderboardPage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold tracking-wider uppercase mb-3">
               <Zap className="w-3.5 h-3.5 text-rose-500" />
-              S-SYSTEM • MERIT EVALUATION LEDGER
+              COTE • CLASSROOM DIRECTORY
             </div>
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white font-mono">
-              Classroom Merit Leaderboard
+              Classroom Student Showcase
             </h1>
             <p className="text-zinc-400 mt-2 text-sm max-w-xl leading-relaxed">
-              Inspired by <span className="text-rose-400 font-semibold">Classroom of the Elite</span>. Students accumulate Class Points (CP) through project showcases, achievements, and peer contributions.
+              Inspired by <span className="text-rose-400 font-semibold">Classroom of the Elite</span>. Discover classmates, explore portfolios, and celebrate student projects.
             </p>
           </div>
 
@@ -155,7 +155,7 @@ export default async function LeaderboardPage() {
               <span>Full Classroom Rankings</span>
             </CardTitle>
             <CardDescription>
-              All classmates ranked by cumulative Class Points (CP)
+              All classmates showcased and ranked by active portfolio contributions
             </CardDescription>
           </CardHeader>
           <CardContent className="p-0">
@@ -203,45 +203,42 @@ export default async function LeaderboardPage() {
           </CardContent>
         </Card>
 
-        {/* How COTE S-System Works Info Card */}
+        {/* Classroom Showcase Info Card */}
         <div className="space-y-6">
           <Card className="border-rose-500/20 dark:border-rose-500/30 bg-gradient-to-b from-rose-50/50 to-white dark:from-zinc-900 dark:to-zinc-950">
             <CardHeader>
               <CardTitle className="text-base font-bold flex items-center gap-2 text-rose-700 dark:text-rose-400">
                 <Sparkles className="w-5 h-5" />
-                <span>How Merit Points Work</span>
+                <span>About Classroom Directory</span>
               </CardTitle>
               <CardDescription className="text-xs">
-                S-System Evaluation Criteria
+                Student Discovery & Showcase
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 text-sm">
               <div className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800">
                 <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Showcase Project</div>
-                  <div className="text-xs text-zinc-500">Publish a live or school project</div>
+                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Project Showcases</div>
+                  <div className="text-xs text-zinc-500">Publish your web apps, demos, and code</div>
                 </div>
-                <span className="font-mono font-bold text-rose-600 dark:text-rose-400">+100 CP</span>
               </div>
 
               <div className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800">
                 <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Verified Achievement</div>
-                  <div className="text-xs text-zinc-500">Hackathons, awards, Dean's list</div>
+                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Student Portfolios</div>
+                  <div className="text-xs text-zinc-500">Share skills, interests, and bio</div>
                 </div>
-                <span className="font-mono font-bold text-rose-600 dark:text-rose-400">+75 CP</span>
               </div>
 
               <div className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800">
                 <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Completed Profile</div>
-                  <div className="text-xs text-zinc-500">Bio, skills, favorite subjects</div>
+                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Classmate Network</div>
+                  <div className="text-xs text-zinc-500">Connect with peers across sections</div>
                 </div>
-                <span className="font-mono font-bold text-rose-600 dark:text-rose-400">+50 CP</span>
               </div>
 
               <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-800 dark:text-rose-300 leading-relaxed">
-                <strong>Note:</strong> Class Points determine your classroom rank and badge status. Class A students receive featured placement across the directory!
+                <strong>Note:</strong> Keep your student portfolio updated so classmates and teachers can easily explore your featured projects!
               </div>
             </CardContent>
           </Card>

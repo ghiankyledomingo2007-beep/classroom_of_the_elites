@@ -148,13 +148,13 @@ export default async function DashboardPage() {
         <div className="relative z-10">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            S-SYSTEM ADVANCED NURTURING SHOWCASE
+            CLASSROOM PORTFOLIO SHOWCASE
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight font-mono">
             Welcome back, {profile.full_name.split(' ')[0]}!
           </h1>
           <p className="mt-3 text-zinc-400 text-sm md:text-base max-w-xl leading-relaxed">
-            In this classroom, every achievement adds to your Class Points (CP). Complete your profile showcase to share projects and earn academic merit.
+            Explore your classmate directory, share your custom projects, and build your student portfolio showcase.
           </p>
         </div>
       </section>
